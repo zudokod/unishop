@@ -1,6 +1,7 @@
 package com.unishop.marketplace.service;
 
 import com.unishop.marketplace.models.Product;
+import com.unishop.marketplace.service.repository.ProductCatalogStore;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
