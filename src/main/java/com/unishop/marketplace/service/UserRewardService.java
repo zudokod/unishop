@@ -1,6 +1,7 @@
-package com.unishop.marketplace.rewards.rules;
+package com.unishop.marketplace.service;
 
 import com.unishop.marketplace.models.UserId;
+import com.unishop.marketplace.rewards.rules.Rule;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -27,7 +28,10 @@ public class UserRewardService {
 
     public Rule.Discount getDiscountByCode(UserId userId, String discountCode){
         List<Rule.Discount> eligibleDiscounts = getEligibleDiscounts(userId);
-        Optional<Rule.Discount> discount = eligibleDiscounts.stream().filter(it -> it.discountCode().equals(discountCode)).findFirst();
-        return discount.orElseThrow();
+        if(eligibleDiscounts != null){
+            Optional<Rule.Discount> discount = eligibleDiscounts.stream().filter(it -> it.discountCode().equals(discountCode)).findFirst();
+            return discount.orElseThrow();
+        }
+        throw new UnsupportedOperationException("No discount with code" + discountCode);
     }
 }

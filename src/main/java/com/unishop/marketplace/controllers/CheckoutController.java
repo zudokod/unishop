@@ -5,7 +5,8 @@ import com.unishop.marketplace.models.Order;
 import com.unishop.marketplace.models.Product;
 import com.unishop.marketplace.models.UserCart;
 import com.unishop.marketplace.models.UserId;
-import com.unishop.marketplace.rewards.rules.UserRewardService;
+import com.unishop.marketplace.rewards.rules.Rule;
+import com.unishop.marketplace.service.UserRewardService;
 import com.unishop.marketplace.service.CheckoutService;
 import com.unishop.marketplace.service.OrderService;
 import com.unishop.marketplace.service.ProductCatalogService;
@@ -13,6 +14,9 @@ import com.unishop.marketplace.service.UserCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Handles Checkout APIs
@@ -36,43 +40,44 @@ public class CheckoutController {
     private OrderService orderService;
 
 
-    @RequestMapping(value = "/user/{userId}/cart/cart_item", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/cart/cart_item", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    private UserCart addCartItem(@PathVariable String userId, @RequestBody Payloads.CartItemRequest cartItemRequest) {
+    private Payloads.UserCartResponse addCartItem(@RequestHeader("userId") String userId, @RequestBody Payloads.CartItemRequest cartItemRequest) {
         Product product = catalogService.findProductById(cartItemRequest.productId());
-        return userCartService.addItemToCart(userId, new CartItem(product, cartItemRequest.quantity()));
+        UserCart userCart = userCartService.addItemToCart(userId, new CartItem(product, cartItemRequest.quantity()));
+        return new Payloads.UserCartResponse(userCart.userId().value(), new ArrayList<>(userCart.items().values()), userCart.rewardIds());
     }
 
-    @RequestMapping(value = "/user/{userId}/cart/discount", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/cart/discount", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    private UserCart addCoupon(@PathVariable String userId, @RequestBody Payloads.CouponItemRequest couponItemRequest) {
-        userCartService.fetchCart(userId).addReward(couponItemRequest.couponCode());
+    private UserCart addCoupon(@RequestHeader("userId") String userId, @RequestBody Payloads.CouponItemRequest couponItemRequest) {
+        Rule.Discount discount = rewardService.getDiscountByCode(new UserId(userId), couponItemRequest.couponCode());
+        userCartService.fetchCart(userId).addReward(discount.discountCode());
         return userCartService.fetchCart(userId);
     }
 
-    @RequestMapping(value = "/user/{userId}/cart", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/cart", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    private UserCart getCart(@PathVariable String userId) {
-        return  userCartService.fetchCart(userId);
+    private Payloads.UserCartResponse getCart(@RequestHeader("userId") String userId) {
+        UserCart userCart =   userCartService.fetchCart(userId);
+        return new Payloads.UserCartResponse(userCart.userId().value(), new ArrayList<>(userCart.items().values()), userCart.rewardIds());
     }
 
-    @RequestMapping(value = "/user/{userId}/cart/checkout", method = RequestMethod.GET)
+    @RequestMapping(value = "/cart/checkout", method = RequestMethod.POST)
     @ResponseBody
-    private Order checkout(@PathVariable String userId) {
-        return checkoutService.checkout(userCartService.fetchCart(userId));
+    private Payloads.OrderResponse checkout(@RequestHeader("userId") String userId) {
+        Order order = checkoutService.checkout(userCartService.fetchCart(userId));
+        return new Payloads.OrderResponse(order.userId().value(), order.orderItems(), order.itemCount(),
+                order.totalAmount(),order.discountAmount(), order.payableAmount(),order.appliedDiscountCoupon());
     }
 
-    @RequestMapping(value = "/user/{userId}/rewards", method = RequestMethod.GET)
+    @RequestMapping(value = "/rewards", method = RequestMethod.GET)
     @ResponseBody
-    private Payloads.DiscountsResponse getRewards(@PathVariable String userId) {
-        return new Payloads.DiscountsResponse(new UserId(userId), rewardService.getEligibleDiscounts(new UserId(userId)));
+    private Payloads.DiscountsResponse getRewards(@RequestHeader("userId") String userId) {
+        return new Payloads.DiscountsResponse(userId, rewardService.getEligibleDiscounts(new UserId(userId)));
     }
 
-    @RequestMapping(value = "/user/{userId}/orders/count", method = RequestMethod.GET)
-    @ResponseBody
-    private int getOrderCount(@PathVariable String userId) {
-       return orderService.getOrderCount(new UserId(userId));
-    }
+
 
 
 }

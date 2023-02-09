@@ -2,17 +2,11 @@ package com.unishop.marketplace.service;
 
 import com.unishop.marketplace.models.Order;
 import com.unishop.marketplace.models.UserCart;
-import com.unishop.marketplace.rewards.discount.OrderDiscountMethod;
 import com.unishop.marketplace.rewards.discount.OrderDiscountService;
 import com.unishop.marketplace.rewards.discount.PercentageReducer;
 import com.unishop.marketplace.rewards.rules.Rule;
-import com.unishop.marketplace.rewards.rules.UserRewardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
 
 /**
  * Handles the supported adjustment operations for reward for order. Currently only support discount

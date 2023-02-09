@@ -2,7 +2,6 @@ package com.unishop.marketplace.service;
 
 import com.unishop.marketplace.models.Order;
 import com.unishop.marketplace.models.UserId;
-import com.unishop.marketplace.rewards.rules.UserRewardService;
 import com.unishop.marketplace.service.repository.OrderHistoryStore;
 import com.unishop.marketplace.service.repository.UserCartStore;
 import org.springframework.beans.factory.annotation.Autowired;

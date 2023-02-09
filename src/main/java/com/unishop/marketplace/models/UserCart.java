@@ -5,9 +5,10 @@ import java.util.*;
 /**
  * Handles User Cart
  * @param userId
- * @param items
+ * @param items map of product id and product item in cart
  * @param rewardIds
  */
+
 public record UserCart(UserId userId, Map<String, CartItem> items, List<String> rewardIds) {
     public static UserCart createEmptyCart(String userId) {
         return new UserCart(new UserId(userId), new HashMap<>(), new ArrayList<String>());
