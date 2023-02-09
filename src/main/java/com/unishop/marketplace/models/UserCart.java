@@ -2,9 +2,15 @@ package com.unishop.marketplace.models;
 
 import java.util.*;
 
-public record UserCart(String userId, Map<String, CartItem> items, List<String> rewardIds) {
+/**
+ * Handles User Cart
+ * @param userId
+ * @param items
+ * @param rewardIds
+ */
+public record UserCart(UserId userId, Map<String, CartItem> items, List<String> rewardIds) {
     public static UserCart createEmptyCart(String userId) {
-        return new UserCart(userId, new HashMap<>(), new ArrayList<>());
+        return new UserCart(new UserId(userId), new HashMap<>(), new ArrayList<String>());
     }
 
     public UserCart updateCart(CartItem item) {
@@ -19,7 +25,8 @@ public record UserCart(String userId, Map<String, CartItem> items, List<String> 
     }
 
     public UserCart addReward(String rewardId) {
-        rewardIds.add(rewardId);
-        return this;
+        // support only one coupon now
+        if(this.rewardIds.size() == 0) this.rewardIds.add(rewardId);
+       return this;
     }
 }

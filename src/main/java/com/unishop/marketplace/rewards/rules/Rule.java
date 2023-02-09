@@ -4,18 +4,19 @@ import java.util.List;
 
 public interface Rule<T>{
 
-    public enum RuleType {ORDER_COUNT}
-    public enum DiscountType {ORDER_AMOUNT}
-    //public enum LogicType {AND, OR, NOT}
-    public enum ExpressionType {NUMBER, STRING}
-    public static record RuleRequest(List<RuleConfig> orderRules, Discount discount) {}
-    public static record RuleConfig(RuleType ruleType, String expressionValue, String operator) {}
-    public static record Discount(String discountCode, DiscountType discountType, int percentage) {}
-
-    public RuleType ruleType();
-    public OperatorExpression<T> expression();
-    public ExpressionType getExpressionType();
-    //public OrderRuleParameter<T> param();
-    public boolean evaluate(RuleParameter<T> param);
+    /***
+     * Note that I sued types to route on switch conditions as well. The UI will provide the matching type code as well
+     * as the rule definitions are predefined
+     */
+    enum RuleType {ORDER_COUNT}
+    enum DiscountType {ORDER_AMOUNT_PERCENT}
+    enum ExpressionType {NUMBER, STRING}
+    record RuleRequest(List<RuleConfig> orderRules, Discount discount) {}
+    record RuleConfig(RuleType ruleType, String expressionValue, String operator) {}
+    record Discount(String discountCode, DiscountType discountType, int percentage) {}
+    RuleType ruleType();
+    OperatorExpression<T> expression();
+    ExpressionType getExpressionType();
+    boolean evaluate(RuleParameter<T> param);
 
 }

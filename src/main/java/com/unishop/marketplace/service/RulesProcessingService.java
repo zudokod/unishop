@@ -1,5 +1,7 @@
-package com.unishop.marketplace.rewards.rules;
+package com.unishop.marketplace.service;
 
+import com.unishop.marketplace.models.UserId;
+import com.unishop.marketplace.rewards.rules.*;
 import com.unishop.marketplace.service.repository.OrderHistoryStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

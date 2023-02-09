@@ -1,5 +1,9 @@
-package com.unishop.marketplace.rewards.rules;
+package com.unishop.marketplace.service;
 
+import com.unishop.marketplace.rewards.rules.NumberPredicate;
+import com.unishop.marketplace.rewards.rules.OrderCountRule;
+import com.unishop.marketplace.rewards.rules.OrderRuleSet;
+import com.unishop.marketplace.rewards.rules.Rule;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,7 +30,7 @@ public class RuleDefinitionService {
         Rule.RuleConfig ruleConfig = new Rule.RuleConfig(Rule.RuleType.ORDER_COUNT, "2", "%");
         List<Rule.RuleConfig> configs = new ArrayList<>();
         configs.add(ruleConfig);
-        Rule.Discount discount = new Rule.Discount("dsc_1", Rule.DiscountType.ORDER_AMOUNT, 10);
+        Rule.Discount discount = new Rule.Discount("DISCOUNT10", Rule.DiscountType.ORDER_AMOUNT_PERCENT, 10);
         return new Rule.RuleRequest(configs, discount);
     }
 
@@ -45,7 +49,6 @@ public class RuleDefinitionService {
         Rule.RuleConfig ruleConfig =  request.orderRules().get(0);
         Integer expressionValue = Integer.parseInt(ruleConfig.expressionValue());
         Rule.RuleType ruleType = ruleConfig.ruleType();
-        //OrderRuleParameter<Integer> parameter = new OrderRuleParameter<>(ruleValue);
         NumberPredicate operatorExpression = new NumberPredicate(expressionValue, ruleConfig.operator());
         return new OrderCountRule(operatorExpression,  ruleConfig.ruleType());
     }

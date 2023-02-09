@@ -1,5 +1,8 @@
 package com.unishop.marketplace.rewards.rules;
 
+/**
+ * Supports number predicates
+ */
 public class NumberPredicate implements OperatorExpression<Integer> {
 
     private Integer value;

@@ -1,23 +1,26 @@
 package com.unishop.marketplace.service.repository;
 
 import com.unishop.marketplace.models.Order;
-import com.unishop.marketplace.models.Product;
+import com.unishop.marketplace.models.UserId;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * In memory store for order history associated with user
+ */
 public class OrderHistoryStore {
 
-    private static final Map<String, List<Order>> orderHistory = new HashMap<>();
+    private static final Map<UserId, List<Order>> orderHistory = new HashMap<>();
 
 
-    public static void insertOrder(String userId, List<Order> orders){
-        orderHistory.put(userId, orders);
+    public static void insertOrder(UserId userId, Order order){
+        orderHistory.computeIfAbsent(userId, k -> new ArrayList<Order>());
+        orderHistory.get(userId).add(order);
     }
 
 
-    public static int findOrderCount(String userId){
-       return Optional.of(orderHistory.get(userId)).orElse(Collections.emptyList()).size();
+    public static int findOrderCount(UserId userId){
+       return Optional.ofNullable(orderHistory.get(userId)).orElse(Collections.emptyList()).size();
     }
 
 }

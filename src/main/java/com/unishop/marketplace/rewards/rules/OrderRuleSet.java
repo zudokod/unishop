@@ -3,6 +3,9 @@ package com.unishop.marketplace.rewards.rules;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Stores rule and associated discount
+ */
 public class OrderRuleSet {
 
     public OrderRuleSet(){

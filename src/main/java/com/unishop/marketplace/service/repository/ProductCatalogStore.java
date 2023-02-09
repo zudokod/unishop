@@ -6,6 +6,9 @@ import com.unishop.marketplace.models.Product;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * In memory store for products. Its predefined
+ */
 public class ProductCatalogStore {
 
     private static final Map<String, Product> productMap = new ConcurrentHashMap<>();
@@ -18,9 +21,10 @@ public class ProductCatalogStore {
     }
 
     public static final List<Product> findAllProducts(){
-        Product product = productMap.get("1");
-        AvailableStock newStock = product.availableStock().update(10);
-        productMap.replace("1", product, product.updateStock(newStock));
+       /* Product product = productMap.get("1");
+        int addon = 10;
+        AvailableStock newStock = new AvailableStock(product.availableStock().quantity() + addon);
+        productMap.replace("1", product, product.updateStock(newStock));*/
         return productMap.values().stream().toList();
     }
 
@@ -30,7 +34,8 @@ public class ProductCatalogStore {
 
     public static void addToProductStock(String key, int quantity ){
         Product product = productMap.get(key);
-        AvailableStock newStock = product.availableStock().update(quantity);
+        int addon = 10;
+        AvailableStock newStock = new AvailableStock(product.availableStock().quantity() + addon);
         productMap.replace(key, product.updateStock(newStock));
     }
 

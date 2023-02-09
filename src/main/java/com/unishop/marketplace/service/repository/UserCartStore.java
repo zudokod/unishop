@@ -6,6 +6,9 @@ import com.unishop.marketplace.models.UserCart;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * In memory store for cart associated with user
+ */
 public class UserCartStore {
 
     private static final Map<String, UserCart> userCartMap = new ConcurrentHashMap<>();

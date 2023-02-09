@@ -1,5 +1,6 @@
 package com.unishop.marketplace.rewards.rules;
 
+import com.unishop.marketplace.models.UserId;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

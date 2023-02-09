@@ -1,5 +1,8 @@
 package com.unishop.marketplace.rewards.rules;
 
+/**
+ * A rule setting for order counts to act on Nth orders. This is backed by modulo "%" expression
+ */
 public class OrderCountRule implements Rule<Integer> {
 
     private ExpressionEvaluator<Integer> ruleEvaluator = new ExpressionEvaluator<>();
@@ -9,7 +12,6 @@ public class OrderCountRule implements Rule<Integer> {
 
     public OrderCountRule (NumberPredicate expression, RuleType option){
         this.option = option;
-       // this.param = param;
         this.expression = expression;
     }
 
@@ -29,7 +31,6 @@ public class OrderCountRule implements Rule<Integer> {
     @Override
     public boolean evaluate(RuleParameter<Integer> param) {
         int currentOrderCount = param.value();
-        //if (currentOrderCount % expression.value() == 0) return true;
         return ruleEvaluator.evaluate(this, param);
     }
 
