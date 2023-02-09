@@ -18,6 +18,7 @@ On order complete, the discount coupon is used up.
     - But the capability is there to add custom rules and associate discount
     - The API for discount definition and rule definition is not exposed but service implementation is there
     - Custom rule chaining engine
+- No error responses for now, which will be updated later.
 
 
 The sample postman collection can be found in [api](/apis/Unishop.postman_collection.json)
