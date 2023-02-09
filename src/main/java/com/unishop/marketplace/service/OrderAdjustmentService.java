@@ -19,6 +19,7 @@ public class OrderAdjustmentService {
 
     @Autowired
     private OrderDiscountService orderDiscountService;
+
     @Autowired
     private PercentageReducer percentageReducer;
 
@@ -33,6 +34,7 @@ public class OrderAdjustmentService {
         // note that we are supporting only discount at time
         if(userCart.rewardIds().size() > 0) {
             Rule.Discount discount = this.rewardService.getDiscountByCode(order.userId(), userCart.rewardIds().get(0));
+            if(discount == null) return  order;
             // Switch is here to demonstrate various options possible.
             switch (discount.discountType()) {
                 // this is applicable only if we are using one type of discount, say percentage or reduce fixed amount

@@ -43,8 +43,7 @@ public class CheckoutController {
     @RequestMapping(value = "/cart/cart_item", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     private Payloads.UserCartResponse addCartItem(@RequestHeader("userId") String userId, @RequestBody Payloads.CartItemRequest cartItemRequest) {
-        Product product = catalogService.findProductById(cartItemRequest.productId());
-        UserCart userCart = userCartService.addItemToCart(userId, new CartItem(product, cartItemRequest.quantity()));
+        UserCart userCart = userCartService.addItemToCart(userId, cartItemRequest.productId(), cartItemRequest.quantity());
         return new Payloads.UserCartResponse(userCart.userId().value(), new ArrayList<>(userCart.items().values()), userCart.rewardIds());
     }
 

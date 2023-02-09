@@ -21,6 +21,6 @@ public final class Payloads {
     public static record OrderResponse(String userId, List<Order.OrderItem> orderItems, int itemCount, double totalAmount,
                                        double discountAmount, double payableAmount, Rule.Discount appliedDiscountCoupon){}
     public static record OrderCountResponse(String userid, int orderCount){}
-  
+
 
 }

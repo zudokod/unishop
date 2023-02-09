@@ -23,15 +23,18 @@ public class UserRewardService {
 
     public void removeDiscount(UserId userId, String discountCode){
         Rule.Discount discount = getDiscountByCode(userId, discountCode);
-        if(eligibleDiscounts.get(userId) != null) eligibleDiscounts.get(userId).remove(discount);
+        if(eligibleDiscounts.get(userId) != null && discount != null){
+            eligibleDiscounts.get(userId).remove(discount);
+        }
     }
 
     public Rule.Discount getDiscountByCode(UserId userId, String discountCode){
         List<Rule.Discount> eligibleDiscounts = getEligibleDiscounts(userId);
         if(eligibleDiscounts != null){
-            Optional<Rule.Discount> discount = eligibleDiscounts.stream().filter(it -> it.discountCode().equals(discountCode)).findFirst();
-            return discount.orElseThrow();
+            Optional<Rule.Discount> discount = eligibleDiscounts.stream().filter(it -> it.discountCode()
+                    .equals(discountCode)).findFirst();
+            return discount.orElse(null);
         }
-        throw new UnsupportedOperationException("No discount with code" + discountCode);
+        return null;
     }
 }

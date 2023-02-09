@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+
+/***
+ * This is predefined rule definition. Ideally this should be possible to be defined from UI
+ */
+
 @Service
 public class RuleDefinitionService {
 
@@ -26,8 +31,12 @@ public class RuleDefinitionService {
         ruleBuilder(createRuleRequest());
     }
 
+    /**
+     * Instead of creating rule request, one should be able to define from API. For now, keeping like this
+     * @return
+     */
     private Rule.RuleRequest createRuleRequest() {
-        Rule.RuleConfig ruleConfig = new Rule.RuleConfig(Rule.RuleType.ORDER_COUNT, "2", "%");
+        Rule.RuleConfig ruleConfig = new Rule.RuleConfig(Rule.RuleType.ORDER_COUNT, "10", "%");
         List<Rule.RuleConfig> configs = new ArrayList<>();
         configs.add(ruleConfig);
         Rule.Discount discount = new Rule.Discount("DISCOUNT10", Rule.DiscountType.ORDER_AMOUNT_PERCENT, 10);
@@ -45,6 +54,11 @@ public class RuleDefinitionService {
 
     }
 
+    /***
+     * Right now only one rule is defined
+     * @param request
+     * @return
+     */
     private OrderCountRule createOrderCountRule(Rule.RuleRequest request) {
         Rule.RuleConfig ruleConfig =  request.orderRules().get(0);
         Integer expressionValue = Integer.parseInt(ruleConfig.expressionValue());

@@ -20,11 +20,9 @@ public class ProductCatalogStore {
         productMap.put("4", new Product("4", "Insulin Syringe", 40.00, new AvailableStock(117)));
     }
 
+    public static void init(){}
+
     public static final List<Product> findAllProducts(){
-       /* Product product = productMap.get("1");
-        int addon = 10;
-        AvailableStock newStock = new AvailableStock(product.availableStock().quantity() + addon);
-        productMap.replace("1", product, product.updateStock(newStock));*/
         return productMap.values().stream().toList();
     }
 

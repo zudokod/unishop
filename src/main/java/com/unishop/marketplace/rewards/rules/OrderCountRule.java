@@ -30,7 +30,6 @@ public class OrderCountRule implements Rule<Integer> {
 
     @Override
     public boolean evaluate(RuleParameter<Integer> param) {
-        int currentOrderCount = param.value();
         return ruleEvaluator.evaluate(this, param);
     }
 
