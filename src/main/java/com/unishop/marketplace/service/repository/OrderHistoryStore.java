@@ -22,6 +22,9 @@ public class OrderHistoryStore {
     public static int findOrderCount(UserId userId){
        return Optional.ofNullable(orderHistory.get(userId)).orElse(Collections.emptyList()).size();
     }
-    
+
+    public static List<Order> getOrderHistory(UserId userId){
+        return orderHistory.get(userId);
+    }
 
 }

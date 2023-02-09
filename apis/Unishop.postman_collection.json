@@ -1,0 +1,242 @@
+{
+	"info": {
+		"_postman_id": "61c1860d-9042-4916-b1c9-015283a1599c",
+		"name": "Unishop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/products",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/product/1",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"product",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Cart",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "userId",
+						"value": "{{userId}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://{{host}}/cart",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"cart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Cart item",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "userid",
+						"value": "{{userId}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productId\" : \"1\",\n    \"quantity\" : 11\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}/cart/cart_item",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"cart",
+						"cart_item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Discounts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "userId",
+						"value": "{{userId}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://{{host}}/rewards",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Apply Coupon",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "userId",
+						"value": "{{userId}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"couponCode\" : \"DISCOUNT10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}/cart/discount",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"cart",
+						"discount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checkout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "userId",
+						"value": "{{userId}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://{{host}}/cart/checkout",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"cart",
+						"checkout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get OrderCount",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "userId",
+						"value": "{{userId}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://{{host}}/orders/count",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"orders",
+						"count"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order History",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "userId",
+						"value": "{{userId}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://{{host}}/orders",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:8080"
+		}
+	]
+}
