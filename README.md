@@ -5,11 +5,22 @@ The project's naive custom rule engine is build on java. Better options are ther
 rule engines or DSL etc. If python is used, we could have used other engines like PyKE, rule-engine, sickit etc
 
 This is a naive implementation where the rule are defined in
-[com.unishop.marketplace.servic.RuleDefinitions] where the RuleConfig is set. This can be further enhanced to support different configs and rules
+[com.unishop.marketplace.servic.RuleDefinitions] where the RuleConfig is set. 
+This can be further enhanced to support different configs and rules through REST API
 
 On order complete ie. checkout -> if the rule is satsfied an action is taken, in this case associate a discount coupon to user
 The discount coupon is manually set to cart on next shopping which will be tagged for that checkout.
 On order complete, the discount coupon is used up.
+
+Test cases are added under /src/test/java/com/unishop/marketplace
+
+This uses Java 17, Spring Boot
+
+For the use of
+1. Generate a discount code if the condition above is satisfied.
+     - Use the discounts API, once N times the checkout is done (refer test suite), the discount is added
+2. Lists count of items purchased, total purchase amount, list of discount codes and total discount amount.
+    -  Use the order history API. Otherwise, the checkout will return order details as well
 
 #### Assumptions made
 - Uses predefined product catalog
