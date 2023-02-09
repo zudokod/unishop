@@ -33,6 +33,45 @@ The sample postman collection can be found in [api](/apis/Unishop.postman_collec
 >http://{{host}}/products
 >```
 
+### Response
+
+```json
+[
+    {
+        "id": "1",
+        "name": "Surgical Mask",
+        "unitPrice": 10.0,
+        "availableStock": {
+            "quantity": 128
+        }
+    },
+    {
+        "id": "2",
+        "name": "Surgical Gloves",
+        "unitPrice": 50.0,
+        "availableStock": {
+            "quantity": 41
+        }
+    },
+    {
+        "id": "3",
+        "name": "Unisex Hospital Gown",
+        "unitPrice": 100.0,
+        "availableStock": {
+            "quantity": 68
+        }
+    },
+    {
+        "id": "4",
+        "name": "Insulin Syringe",
+        "unitPrice": 40.0,
+        "availableStock": {
+            "quantity": 117
+        }
+    }
+]
+```
+
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
 ### End-point: Get Product by Id
@@ -41,6 +80,19 @@ The sample postman collection can be found in [api](/apis/Unishop.postman_collec
 >http://{{host}}/product/1
 >```
 
+### Response
+
+
+```json
+{
+    "id": "1",
+    "name": "Surgical Mask",
+    "unitPrice": 10.0,
+    "availableStock": {
+        "quantity": 128
+    }
+}
+```
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
 ### End-point: Get Cart
@@ -54,7 +106,16 @@ The sample postman collection can be found in [api](/apis/Unishop.postman_collec
 |---|---|
 |userId|{{userId}}|
 
+### Response
 
+```json
+{
+    "userId": "1",
+    "items": [],
+    "rewardIds": []
+}
+
+```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
@@ -79,6 +140,28 @@ The sample postman collection can be found in [api](/apis/Unishop.postman_collec
 }
 ```
 
+### Response
+
+```json
+{
+    "userId": "1",
+    "items": [
+        {
+            "product": {
+                "id": "1",
+                "name": "Surgical Mask",
+                "unitPrice": 10.0,
+                "availableStock": {
+                    "quantity": 128
+                }
+            },
+            "quantity": 11
+        }
+    ],
+    "rewardIds": []
+}
+
+```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
@@ -93,7 +176,21 @@ The sample postman collection can be found in [api](/apis/Unishop.postman_collec
 |---|---|
 |userId|{{userId}}|
 
+### Response
 
+```json
+{
+    "userId": "1",
+    "eligibleDiscounts": [
+        {
+            "discountCode": "DISCOUNT10",
+            "discountType": "ORDER_AMOUNT_PERCENT",
+            "percentage": 10
+        }
+    ]
+}
+
+```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
@@ -117,6 +214,32 @@ The sample postman collection can be found in [api](/apis/Unishop.postman_collec
 }
 ```
 
+### Response
+
+```json
+
+{
+    "userId": {
+        "value": "1"
+    },
+    "items": {
+        "1": {
+            "product": {
+                "id": "1",
+                "name": "Surgical Mask",
+                "unitPrice": 10.0,
+                "availableStock": {
+                    "quantity": 128
+                }
+            },
+            "quantity": 11
+        }
+    },
+    "rewardIds": [
+        "DISCOUNT10"
+    ]
+}
+```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
@@ -131,7 +254,27 @@ The sample postman collection can be found in [api](/apis/Unishop.postman_collec
 |---|---|
 |userId|{{userId}}|
 
+### Response
 
+```json
+{
+    "userId": "1",
+    "orderItems": [
+        {
+            "productId": "1",
+            "name": "Surgical Mask",
+            "quantity": 11,
+            "price": 10.0
+        }
+    ],
+    "itemCount": 11,
+    "totalAmount": 110.0,
+    "discountAmount": 0.0,
+    "payableAmount": 110.0,
+    "appliedDiscountCoupon": null
+}
+
+```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
@@ -147,6 +290,14 @@ The sample postman collection can be found in [api](/apis/Unishop.postman_collec
 |userId|{{userId}}|
 
 
+#### Response
+
+```json
+{
+    "userid": "1",
+    "orderCount": 1
+}
+```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
@@ -161,6 +312,30 @@ The sample postman collection can be found in [api](/apis/Unishop.postman_collec
 |---|---|
 |userId|{{userId}}|
 
+#### Response
 
+```json
+[
+    {
+        "userId": {
+            "value": "1"
+        },
+        "orderItems": [
+            {
+                "productId": "1",
+                "name": "Surgical Mask",
+                "quantity": 11,
+                "price": 10.0
+            }
+        ],
+        "itemCount": 11,
+        "totalAmount": 110.0,
+        "discountAmount": 0.0,
+        "payableAmount": 110.0,
+        "appliedDiscountCoupon": null
+    }
+]
+
+```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
